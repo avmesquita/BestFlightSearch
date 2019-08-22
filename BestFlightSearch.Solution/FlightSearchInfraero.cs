@@ -100,7 +100,7 @@ namespace BestFlightSearch.Solution
         /// <param name="AirportCode"></param>
         /// <param name="Language"></param>
         /// <returns></returns>
-        public List<FlightCompany> QueryFlightCompanies(string AirportCode, string Language = "bra")
+        public List<Company> QueryFlightCompanies(string AirportCode, string Language = "bra")
         {
             try
             {
@@ -115,13 +115,13 @@ namespace BestFlightSearch.Solution
                 var nodes = xml.DocumentElement.SelectNodes("/COMPANHIAS/COMPANHIA");
 
                 // CREATE RESPONSE OBJECT
-                var companies = new List<FlightCompany>();
+                var companies = new List<Company>();
 
                 if (nodes.Count > 0)
                 {
                     foreach (XmlNode item in nodes)
                     {
-                        var obj = new FlightCompany();
+                        var obj = new Company();
 
                         obj.Name = item["NOM_CIA"].InnerText;
                         obj.ShortName = item["SIG_CIA"].InnerText;
@@ -139,7 +139,7 @@ namespace BestFlightSearch.Solution
                 {
                     throw ex;
                 }
-                return new List<FlightCompany>();
+                return new List<Company>();
             }
         }
 

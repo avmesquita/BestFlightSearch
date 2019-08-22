@@ -30,8 +30,14 @@ namespace BestFlightSearch
                     }
                 }
 
-                // GET ALL COMPANIES
-                var companies = fs.QueryFlightCompanies("SBGL");
+                // PROMPT AIRPORT CODE
+                Console.Write("Insert 4-digit Airport Code [Default SBGL]: ");
+                string airportCode = Console.ReadLine();
+                if (string.IsNullOrEmpty(airportCode))
+                    airportCode = "SBGL";
+
+                // GET ALL COMPANIES FROM AIRPORT
+                var companies = fs.QueryFlightCompanies(airportCode);
                 if (companies.Count > 0)
                 {
                     Console.WriteLine("\nCOMPANIES");

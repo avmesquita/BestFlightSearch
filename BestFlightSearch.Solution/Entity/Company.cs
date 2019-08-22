@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace BestFlightSearch.Solution.Entity
 {
     [Serializable]
-    public class FlightCompany
+    public class Company
     {
         public string Name { get; set; }
         public string ShortName { get; set; }

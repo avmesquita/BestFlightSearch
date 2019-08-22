@@ -26,7 +26,7 @@ namespace BestFlightSearch.Solution.Interface
         /// <param name="AirportCode"></param>
         /// <param name="Language"></param>
         /// <returns></returns>
-        List<FlightCompany> QueryFlightCompanies(string AirportCode, string Language = "bra");
+        List<Company> QueryFlightCompanies(string AirportCode, string Language = "bra");
 
 
         /// <summary>
