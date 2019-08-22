@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BestFlightSearch.Solution.Entity
 {
+    [Serializable]
     public class Airport
     {
         public string Name { get; set; }

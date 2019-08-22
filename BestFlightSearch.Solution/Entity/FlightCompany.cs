@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BestFlightSearch.Solution.Entity
 {
+    [Serializable]
     public class FlightCompany
     {
         public string Name { get; set; }

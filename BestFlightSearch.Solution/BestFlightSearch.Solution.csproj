@@ -53,6 +53,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Entity\Flight.cs" />
     <Compile Include="Entity\FlightCompany.cs" />
     <Compile Include="FlightSearchInfraero.cs" />
     <Compile Include="Interface\IFlightSearch.cs" />

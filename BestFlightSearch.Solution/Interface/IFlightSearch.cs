@@ -40,7 +40,7 @@ namespace BestFlightSearch.Solution.Interface
         /// <param name="RecordsPerPage"></param>
         /// <param name="PageNumber"></param>
         /// <returns></returns>
-        string QueryFlightPerNumber(string AirportCode, string FlightNumber, string Language = "bra", bool Departure = true, bool ShowEndFlights = false, int RecordsPerPage = 10, int PageNumber = 1);
+        List<Flight> QueryFlightPerNumber(string AirportCode, string FlightNumber, string Language = "bra", bool Departure = true, bool ShowEndFlights = false, int RecordsPerPage = 10, int PageNumber = 1);
 
         /// <summary>
         /// Query By Flight Company
@@ -53,7 +53,7 @@ namespace BestFlightSearch.Solution.Interface
         /// <param name="RecordsPerPage"></param>
         /// <param name="PageNumber"></param>
         /// <returns></returns>
-        string QueryFlightPerFlightCompany(string AirportCode, string FlightCompany, string Language = "bra", bool Departure = true, bool ShowEndFlights = false, int RecordsPerPage = 10, int PageNumber = 1);
+        List<Flight> QueryFlightPerFlightCompany(string AirportCode, string FlightCompany, string Language = "bra", bool Departure = true, bool ShowEndFlights = false, int RecordsPerPage = 10, int PageNumber = 1);
 
         /// <summary>
         /// Query By Flight Direction
@@ -65,6 +65,6 @@ namespace BestFlightSearch.Solution.Interface
         /// <param name="RecordsPerPage"></param>
         /// <param name="PageNumber"></param>
         /// <returns></returns>
-        string QueryFlightPerDirection(string AirportCode, string Language, bool Departure = true, bool ShowEndFlights = false, int RecordsPerPage = 10, int PageNumber = 1);
+        List<Flight> QueryFlightPerDirection(string AirportCode, string Language = "bra", bool Departure = true, bool ShowEndFlights = false, int RecordsPerPage = 10, int PageNumber = 1);        
     }
 }

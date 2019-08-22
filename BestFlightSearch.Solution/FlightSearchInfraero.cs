@@ -28,7 +28,20 @@ namespace BestFlightSearch.Solution
         public FlightSearchInfraero()
         {
             // INSTANCE CLIENT TO INFRAERO SERVICE
+            client = new ConsultaVoosClient();            
+        }
+
+        /// <summary>
+        /// Constructor with timout property
+        /// </summary>
+        /// <param name="TimeOut"></param>
+        public FlightSearchInfraero(int TimeOut = 10000)
+        {
+            // INSTANCE CLIENT TO INFRAERO SERVICE
             client = new ConsultaVoosClient();
+
+            // SET DEFAULT TIMEOUT
+            client.InnerChannel.OperationTimeout = new TimeSpan(TimeOut);
         }
 
         /// <summary>
@@ -141,21 +154,60 @@ namespace BestFlightSearch.Solution
         /// <param name="RecordsPerPage"></param>
         /// <param name="PageNumber"></param>
         /// <returns></returns>
-        public string QueryFlightPerNumber(string AirportCode, string FlightNumber, string Language = "bra", bool Departure = true, bool ShowEndFlights = false, int RecordsPerPage = 10, int PageNumber = 1)
+        public List<Flight> QueryFlightPerNumber(string AirportCode, string FlightNumber, string Language = "bra", bool Departure = true, bool ShowEndFlights = false, int RecordsPerPage = 10, int PageNumber = 1)
         {
-            if (string.IsNullOrEmpty(AirportCode) || string.IsNullOrEmpty(FlightNumber))
-            {
-                return "Invalid Parameters";
-            }
             try
             {
+                // CALL WEBSERVICE METHOD
                 var retorno = client.ConsultarVoosNumero(AirportCode, Language, Departure, FlightNumber, ShowEndFlights, RecordsPerPage, PageNumber);
 
-                return retorno;
+                // MOUNT XML FROM STRING
+                var xml = new XmlDocument();
+                xml.LoadXml(retorno);
+
+                // READ FLIGHT NODES
+                var nodes = xml.DocumentElement.SelectNodes("/VOOS/VOO");
+
+                // CREATE RESPONSE OBJECT
+                var flights = new List<Flight>();
+
+                // MOUNT RESPONSE OBJECT WITH XML NODES
+                if (nodes.Count > 0)
+                {
+                    foreach (XmlNode item in nodes)
+                    {
+                        var obj = new Flight();
+
+                        obj.FlightNumber = item["NUM_VOO"].InnerText;
+                        obj.FlightDate = item["DAT_VOO"].InnerText;
+                        obj.TimePrev = item["HOR_PREV"].InnerText;
+                        obj.TimeConfirmed = item["HOR_CONF"].InnerText;
+                        obj.FlightTPS = item["NUM_TPS"].InnerText;
+                        obj.FlightGate = item["NUM_GATE"].InnerText;
+                        obj.Obs = item["TXT_OBS"].InnerText;
+                        obj.CompanyName = item["NOM_CIA"].InnerText;
+                        obj.CompanyShortName = item["SIG_CIA_AEREA"].InnerText;
+                        obj.Equipment = item["DSC_EQUIPAMENTO"].InnerText;
+                        obj.AirportName = item["NOM_AEROPORTO"].InnerText;
+                        obj.IATACode = item["COD_IATA"].InnerText;
+                        obj.AirportCode = item["COD_ICAO"].InnerText;
+                        obj.City = item["NOM_LOCALIDADE"].InnerText;
+                        obj.StateCode = item["SIG_UF"].InnerText;
+                        obj.Country = item["NOM_PAIS"].InnerText;
+                        obj.FlightKind = item["DSC_NATUREZA"].InnerText;
+                        obj.FlightStatus = item["DSC_STATUS"].InnerText;
+                        obj.FlightStops = item["ESCALAS"].InnerText;
+
+                        flights.Add(obj);
+                    };
+                }
+
+                // RETURN AIRPORTS LIST
+                return flights;
             }
             catch
             {
-                return "Error.";
+                return new List<Flight>();
             }
         }
 
@@ -170,21 +222,64 @@ namespace BestFlightSearch.Solution
         /// <param name="RecordsPerPage"></param>
         /// <param name="PageNumber"></param>
         /// <returns></returns>
-        public string QueryFlightPerFlightCompany(string AirportCode, string FlightCompany, string Language = "bra", bool Departure = true, bool ShowEndFlights = false, int RecordsPerPage = 10, int PageNumber = 1)
+        public List<Flight> QueryFlightPerFlightCompany(string AirportCode, string FlightCompany, string Language = "bra", bool Departure = true, bool ShowEndFlights = false, int RecordsPerPage = 10, int PageNumber = 1)
         {
             if (string.IsNullOrEmpty(AirportCode) || string.IsNullOrEmpty(FlightCompany))
             {
-                return "Invalid Parameters";
+                throw new Exception("Invalid Parameters");
             }
             try
             {
+                // CALL WEBSERVICE METHOD
                 var retorno = client.ConsultarVoosCiaAerea(AirportCode, Language, Departure, FlightCompany, ShowEndFlights, RecordsPerPage, PageNumber);
 
-                return retorno;
+                // MOUNT XML FROM STRING
+                var xml = new XmlDocument();
+                xml.LoadXml(retorno);
+
+                // READ FLIGHT NODES
+                var nodes = xml.DocumentElement.SelectNodes("/VOOS/VOO");
+
+                // CREATE RESPONSE OBJECT
+                var flights = new List<Flight>();
+
+                // MOUNT RESPONSE OBJECT WITH XML NODES
+                if (nodes.Count > 0)
+                {
+                    foreach (XmlNode item in nodes)
+                    {
+                        var obj = new Flight();
+
+                        obj.FlightNumber = item["NUM_VOO"].InnerText;
+                        obj.FlightDate = item["DAT_VOO"].InnerText;
+                        obj.TimePrev = item["HOR_PREV"].InnerText;
+                        obj.TimeConfirmed = item["HOR_CONF"].InnerText;
+                        obj.FlightTPS = item["NUM_TPS"].InnerText;
+                        obj.FlightGate = item["NUM_GATE"].InnerText;
+                        obj.Obs = item["TXT_OBS"].InnerText;
+                        obj.CompanyName = item["NOM_CIA"].InnerText;
+                        obj.CompanyShortName = item["SIG_CIA_AEREA"].InnerText;
+                        obj.Equipment = item["DSC_EQUIPAMENTO"].InnerText;
+                        obj.AirportName = item["NOM_AEROPORTO"].InnerText;
+                        obj.IATACode = item["COD_IATA"].InnerText;
+                        obj.AirportCode = item["COD_ICAO"].InnerText;
+                        obj.City = item["NOM_LOCALIDADE"].InnerText;
+                        obj.StateCode = item["SIG_UF"].InnerText;
+                        obj.Country = item["NOM_PAIS"].InnerText;
+                        obj.FlightKind = item["DSC_NATUREZA"].InnerText;
+                        obj.FlightStatus = item["DSC_STATUS"].InnerText;
+                        obj.FlightStops = item["ESCALAS"].InnerText;
+
+                        flights.Add(obj);
+                    };
+                }
+
+                // RETURN AIRPORTS LIST
+                return flights;
             }
             catch
             {
-                return "Error.";
+                return new List<Flight>();
             }
         }
 
@@ -198,17 +293,60 @@ namespace BestFlightSearch.Solution
         /// <param name="RecordsPerPage"></param>
         /// <param name="PageNumber"></param>
         /// <returns></returns>
-        public string QueryFlightPerDirection(string AirportCode, string Language, bool Departure = true, bool ShowEndFlights = true, int RecordsPerPage = 10, int PageNumber = 1)
+        public List<Flight> QueryFlightPerDirection(string AirportCode, string Language = "bra", bool Departure = true, bool ShowEndFlights = true, int RecordsPerPage = 10, int PageNumber = 1)
         {
             try
             {
+                // CALL WEBSERVICE METHOD
                 var retorno = client.ConsultarVoosSentido(AirportCode, Language, Departure, ShowEndFlights, RecordsPerPage, PageNumber);
 
-                return retorno;
+                // MOUNT XML FROM STRING
+                var xml = new XmlDocument();
+                xml.LoadXml(retorno);
+
+                // READ FLIGHT NODES
+                var nodes = xml.DocumentElement.SelectNodes("/VOOS/VOO");
+
+                // CREATE RESPONSE OBJECT
+                var flights = new List<Flight>();
+
+                // MOUNT RESPONSE OBJECT WITH XML NODES
+                if (nodes.Count > 0)
+                {
+                    foreach (XmlNode item in nodes)
+                    {
+                        var obj = new Flight();
+
+                        obj.FlightNumber = item["NUM_VOO"].InnerText;
+                        obj.FlightDate = item["DAT_VOO"].InnerText;
+                        obj.TimePrev = item["HOR_PREV"].InnerText;
+                        obj.TimeConfirmed = item["HOR_CONF"].InnerText;
+                        obj.FlightTPS = item["NUM_TPS"].InnerText;
+                        obj.FlightGate = item["NUM_GATE"].InnerText;
+                        obj.Obs = item["TXT_OBS"].InnerText;
+                        obj.CompanyName = item["NOM_CIA"].InnerText;
+                        obj.CompanyShortName = item["SIG_CIA_AEREA"].InnerText;
+                        obj.Equipment = item["DSC_EQUIPAMENTO"].InnerText;
+                        obj.AirportName = item["NOM_AEROPORTO"].InnerText;
+                        obj.IATACode = item["COD_IATA"].InnerText;
+                        obj.AirportCode = item["COD_ICAO"].InnerText;
+                        obj.City = item["NOM_LOCALIDADE"].InnerText;
+                        obj.StateCode = item["SIG_UF"].InnerText;
+                        obj.Country = item["NOM_PAIS"].InnerText;
+                        obj.FlightKind = item["DSC_NATUREZA"].InnerText;
+                        obj.FlightStatus = item["DSC_STATUS"].InnerText;
+                        obj.FlightStops = item["ESCALAS"].InnerText;
+
+                        flights.Add(obj);
+                    };
+                }
+
+                // RETURN AIRPORTS LIST
+                return flights;
             }
             catch
             {
-                return "Error.";
+                return new List<Flight>();
             }
         }
 
