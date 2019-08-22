@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ConsultaVoos" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="ConsultarVoosSentido">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="icao" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="idioma" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="partida" type="xs:boolean" />
+            <xs:element minOccurs="0" name="exibirFinalizados" type="xs:boolean" />
+            <xs:element minOccurs="0" name="registrosPagina" type="xs:int" />
+            <xs:element minOccurs="0" name="pagina" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ConsultarVoosSentidoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="ConsultarVoosSentidoResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ConsultarVoosCiaAerea">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="icao" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="idioma" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="partida" type="xs:boolean" />
+            <xs:element minOccurs="0" name="siglaCiaAerea" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="exibirFinalizados" type="xs:boolean" />
+            <xs:element minOccurs="0" name="registrosPagina" type="xs:int" />
+            <xs:element minOccurs="0" name="pagina" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ConsultarVoosCiaAereaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="ConsultarVoosCiaAereaResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ConsultarVoosNumero">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="icao" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="idioma" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="partida" type="xs:boolean" />
+            <xs:element minOccurs="0" name="numeroVoo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="exibirFinalizados" type="xs:boolean" />
+            <xs:element minOccurs="0" name="registrosPagina" type="xs:int" />
+            <xs:element minOccurs="0" name="pagina" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ConsultarVoosNumeroResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="ConsultarVoosNumeroResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ListarAeroportos">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="idioma" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ListarAeroportosResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="ListarAeroportosResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ListarCompanhias">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="icao" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="idioma" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ListarCompanhiasResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="ListarCompanhiasResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IConsultaVoos_ConsultarVoosSentido_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarVoosSentido" />
+  </wsdl:message>
+  <wsdl:message name="IConsultaVoos_ConsultarVoosSentido_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarVoosSentidoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConsultaVoos_ConsultarVoosCiaAerea_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarVoosCiaAerea" />
+  </wsdl:message>
+  <wsdl:message name="IConsultaVoos_ConsultarVoosCiaAerea_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarVoosCiaAereaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConsultaVoos_ConsultarVoosNumero_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarVoosNumero" />
+  </wsdl:message>
+  <wsdl:message name="IConsultaVoos_ConsultarVoosNumero_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarVoosNumeroResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConsultaVoos_ListarAeroportos_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListarAeroportos" />
+  </wsdl:message>
+  <wsdl:message name="IConsultaVoos_ListarAeroportos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListarAeroportosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConsultaVoos_ListarCompanhias_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListarCompanhias" />
+  </wsdl:message>
+  <wsdl:message name="IConsultaVoos_ListarCompanhias_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListarCompanhiasResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IConsultaVoos">
+    <wsdl:operation name="ConsultarVoosSentido">
+      <wsdl:input wsaw:Action="http://tempuri.org/ConsultarVoosSentido" message="tns:IConsultaVoos_ConsultarVoosSentido_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConsultaVoos/ConsultarVoosSentidoResponse" message="tns:IConsultaVoos_ConsultarVoosSentido_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarVoosCiaAerea">
+      <wsdl:input wsaw:Action="http://tempuri.org/ConsultarVoosCiaAerea" message="tns:IConsultaVoos_ConsultarVoosCiaAerea_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConsultaVoos/ConsultarVoosCiaAereaResponse" message="tns:IConsultaVoos_ConsultarVoosCiaAerea_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarVoosNumero">
+      <wsdl:input wsaw:Action="http://tempuri.org/ConsultarVoosNumero" message="tns:IConsultaVoos_ConsultarVoosNumero_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConsultaVoos/ConsultarVoosNumeroResponse" message="tns:IConsultaVoos_ConsultarVoosNumero_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarAeroportos">
+      <wsdl:input wsaw:Action="http://tempuri.org/ListarAeroportos" message="tns:IConsultaVoos_ListarAeroportos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConsultaVoos/ListarAeroportosResponse" message="tns:IConsultaVoos_ListarAeroportos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarCompanhias">
+      <wsdl:input wsaw:Action="http://tempuri.org/ListarCompanhias" message="tns:IConsultaVoos_ListarCompanhias_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConsultaVoos/ListarCompanhiasResponse" message="tns:IConsultaVoos_ListarCompanhias_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Srv" type="tns:IConsultaVoos">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ConsultarVoosSentido">
+      <soap:operation soapAction="http://tempuri.org/ConsultarVoosSentido" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarVoosCiaAerea">
+      <soap:operation soapAction="http://tempuri.org/ConsultarVoosCiaAerea" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarVoosNumero">
+      <soap:operation soapAction="http://tempuri.org/ConsultarVoosNumero" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarAeroportos">
+      <soap:operation soapAction="http://tempuri.org/ListarAeroportos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarCompanhias">
+      <soap:operation soapAction="http://tempuri.org/ListarCompanhias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ConsultaVoos">
+    <wsdl:port name="Srv" binding="tns:Srv">
+      <soap:address location="http://voos.infraero.gov.br/wsvoosmobile/ConsultaVoos.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
