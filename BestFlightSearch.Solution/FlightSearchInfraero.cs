@@ -1,4 +1,4 @@
-﻿using BestFlightSearch.Solution.Entity;
+﻿using BestFlightSearch.Solution.Domain;
 using BestFlightSearch.Solution.infraeroConsultaVoos;
 using BestFlightSearch.Solution.Interface;
 using Newtonsoft.Json;
@@ -28,7 +28,7 @@ namespace BestFlightSearch.Solution
         public FlightSearchInfraero()
         {
             // INSTANCE CLIENT TO INFRAERO SERVICE
-            client = new ConsultaVoosClient();            
+            client = new ConsultaVoosClient();
         }
 
         /// <summary>
@@ -71,15 +71,16 @@ namespace BestFlightSearch.Solution
                 {
                     foreach (XmlNode item in nodes)
                     {
-                        var obj = new Airport();
-
-                        obj.AirportCode = item["COD_ICAO"].InnerText;
-                        obj.City = item["NOM_CIDADE"].InnerText;
-                        obj.HasSIV = (item["POSSUI_SIV"].InnerText == "S") ? true : false;
-                        obj.IATACode = item["COD_IATA"].InnerText;
-                        obj.Name = item["NOM_AEROPORTO"].InnerText;
-                        obj.ShortName = item["VNOM_CURTO"].InnerText;
-                        obj.StateCode = item["SIG_UF"].InnerText;
+                        var obj = new Airport
+                            (
+                                item["NOM_AEROPORTO"].InnerText,
+                                item["VNOM_CURTO"].InnerText,
+                                item["COD_IATA"].InnerText,
+                                item["COD_ICAO"].InnerText,
+                                item["NOM_CIDADE"].InnerText,
+                                item["SIG_UF"].InnerText,
+                                (item["POSSUI_SIV"].InnerText == "S") ? true : false
+                            );
 
                         airports.Add(obj);
                     };

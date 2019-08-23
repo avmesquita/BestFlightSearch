@@ -1,4 +1,4 @@
-﻿using BestFlightSearch.Solution.Entity;
+﻿using BestFlightSearch.Solution.Domain;
 using BestFlightSearch.Solution.Enum;
 using BestFlightSearch.Solution.Interface;
 using RestSharp;
