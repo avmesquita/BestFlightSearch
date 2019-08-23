@@ -14,7 +14,7 @@ namespace BestFlightSearch
     {
         static void Main(string[] args)
         {
-            Test();
+            //Test();
 
             StudyCase();
 
@@ -31,8 +31,17 @@ namespace BestFlightSearch
                 // INSTANCE INFRAERO SOLUTION
                 var fs = new FlightSearchInfraero();
 
+                string _airportCode = "SGBL";
+                string _flightCompany = "TAM";
+                string _flightNumber = string.Empty;
 
+                var airports = fs.QueryAirports("bra");
+                var companies = fs.QueryFlightCompanies(_airportCode,"bra");
 
+                var flighstByCompany = fs.QueryFlightPerFlightCompany(_airportCode, _flightCompany, "bra",true,true,1000,1);
+                var flightsByDirection = fs.QueryFlightPerDirection(_airportCode,"bra",true,true,1000,1);
+                var flightsByNumber = fs.QueryFlightPerNumber(_airportCode, _flightNumber,"bra",true,true,1000,1);
+                
 
                 fs.Dispose();
             }
@@ -106,7 +115,7 @@ namespace BestFlightSearch
 
                 #region [ GET ALL FLIGHTS BY NUMBER SELECTED ]
 
-                var flightsByNumber = fs.QueryFlightPerNumber(_airportCode, _flightNumber);
+                var flightsByNumber = fs.QueryFlightPerNumber(_airportCode, _flightNumber,"bra",true,true,100,1);
                 if (flightsByNumber.Count > 0)
                 {
                     Console.WriteLine("\nFLIGHTS BY NUMBER");
@@ -131,7 +140,7 @@ namespace BestFlightSearch
 
                 #region [ GET ALL FLIGHTS BY AIRPORT AND/OR COMPANY SELECTED ]
 
-                var flighstByCompany = fs.QueryFlightPerFlightCompany(_airportCode, _flightCompany);
+                var flighstByCompany = fs.QueryFlightPerFlightCompany(_airportCode, _flightCompany, "bra", true, true, 100, 1);
                 if (flighstByCompany.Count > 0)
                 {
                     Console.WriteLine("\nFLIGHTS BY COMPANY");
@@ -156,7 +165,7 @@ namespace BestFlightSearch
 
                 #region [ GET ALL FLIGHTS TO SELECTED AIRPORT DIRECTION ]
 
-                var flightsByDirection = fs.QueryFlightPerDirection(_airportCode);
+                var flightsByDirection = fs.QueryFlightPerDirection(_airportCode,"bra",true,true,100,1);
                 if (flightsByDirection.Count > 0)
                 {
                     Console.WriteLine("\nFLIGHTS BY DIRECTION");
