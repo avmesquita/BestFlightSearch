@@ -25,7 +25,10 @@ namespace BestFlightSearch.Solution
 
         public void Dispose()
         {
-
+            this.client = null;
+            this.request = null;
+            this.Response = null;
+            this.ErrorMessage = string.Empty;
         }
 
         public IRestResponse Execute(SkyScannerIOMethod method, string[] parameters)
@@ -36,7 +39,7 @@ namespace BestFlightSearch.Solution
                 {
                     case SkyScannerIOMethod.Autenticatiom_Token:
                         {
-                            this.client = new RestClient(this._SkyScannerIO_Host + "/apiservices/token/v2/gettoken?apiKey={ "+this._SkyScannerIO_Key+" }");
+                            this.client = new RestClient(this._SkyScannerIO_Host + "/apiservices/token/v2/gettoken?apiKey={" + this._SkyScannerIO_Key + "}");
                             this.request = new RestRequest(Method.GET);
                             this.Response = client.Execute(request);
                             return this.Response;
@@ -49,7 +52,6 @@ namespace BestFlightSearch.Solution
                             this.ErrorMessage = "Cannot initialize";
                             return null;
                         }
-
                 }
             }
             catch (Exception ex)
@@ -62,3 +64,4 @@ namespace BestFlightSearch.Solution
             }
         }
     }
+}
