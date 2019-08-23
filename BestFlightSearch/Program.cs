@@ -34,7 +34,7 @@ namespace BestFlightSearch
 
 
 
-
+                fs.Dispose();
             }
             catch (Exception ex)
             {
@@ -178,6 +178,8 @@ namespace BestFlightSearch
                 }
 
                 #endregion
+
+                fs.Dispose();
             }
             catch (Exception ex)
             {
