@@ -14,30 +14,85 @@ namespace BestFlightSearch
     {
         static void Main(string[] args)
         {
+            Test();
+
+            StudyCase();
+
+            Console.ReadLine();
+        }
+
+        /// <summary>
+        /// Studying...
+        /// </summary>
+        static void StudyCase()
+        {
             try
             {
                 // INSTANCE INFRAERO SOLUTION
                 var fs = new FlightSearchInfraero();
 
-                // GET ALL AIRPORTS
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
+            Console.ReadKey();
+        }
+
+        /// <summary>
+        /// Test for main methods
+        /// </summary>
+        static void Test()
+        {
+            try
+            {
+                // INSTANCE INFRAERO SOLUTION
+                var fs = new FlightSearchInfraero();
+
+                #region [ GET AIRPORTS LIST ]
+                
                 var airports = fs.QueryAirports();
                 if (airports.Count > 0)
                 {
-                    Console.WriteLine("AIRPORTS");
+                    Console.WriteLine("AIRPORTS\n");
+                    Console.WriteLine("Airport Code | Name | IATA Code | State Code ");
                     foreach (var item in airports)
                     {
-                        Console.WriteLine(string.Concat(item.AirportCode, " - ", item.Name, " - ", item.IATACode, " - ", item.StateCode));
+                        Console.WriteLine(string.Concat(item.AirportCode, " | ", item.Name, " | ", item.IATACode, " | ", item.StateCode));
                     }
-                }
+                }                
+
+                #endregion
+
+                #region [ PROMPT ]
 
                 // PROMPT AIRPORT CODE
                 Console.Write("Insert 4-digit Airport Code [Default SBGL]: ");
-                string airportCode = Console.ReadLine();
-                if (string.IsNullOrEmpty(airportCode))
-                    airportCode = "SBGL";
+                string _airportCode = Console.ReadLine();
+                if (string.IsNullOrEmpty(_airportCode))
+                    _airportCode = "SBGL";
 
-                // GET ALL COMPANIES FROM AIRPORT
-                var companies = fs.QueryFlightCompanies(airportCode);
+                // PROMPT FLIGHT NUMBER
+                Console.Write("Insert Flight Number [Default '']: ");
+                string _flightNumber = Console.ReadLine();
+                if (string.IsNullOrEmpty(_flightNumber))
+                    _flightNumber = string.Empty;
+
+                // PROMPT COMPANY
+                Console.Write("Insert Company Code [Default '']: ");
+                string _flightCompany = Console.ReadLine();
+                if (string.IsNullOrEmpty(_flightCompany))
+                    _flightCompany = string.Empty;
+
+                #endregion
+
+                #region [ GET ALL COMPANIES FROM AIRPORT SELECTED ]
+
+                var companies = fs.QueryFlightCompanies(_airportCode);
                 if (companies.Count > 0)
                 {
                     Console.WriteLine("\nCOMPANIES");
@@ -47,8 +102,11 @@ namespace BestFlightSearch
                     }
                 }
 
-                // GET ALL FLIGHTS BY NUMBER
-                var flightsByNumber = fs.QueryFlightPerNumber("SBRJ", "");
+                #endregion
+
+                #region [ GET ALL FLIGHTS BY NUMBER SELECTED ]
+
+                var flightsByNumber = fs.QueryFlightPerNumber(_airportCode, _flightNumber);
                 if (flightsByNumber.Count > 0)
                 {
                     Console.WriteLine("\nFLIGHTS BY NUMBER");
@@ -62,14 +120,18 @@ namespace BestFlightSearch
                         item.FlightGate, " | ",
                         item.FlightDate, " | ",
                         item.TimePrev, " | ",
-                        item.TimeConfirmed);
+                        item.TimeConfirmed, " | ",
+                        item.FlightStops);
 
                         Console.WriteLine(outText);
                     }
                 }
 
-                // GET ALL FLIGHTS BY AIRPORT AND COMPANY
-                var flighstByCompany = fs.QueryFlightPerFlightCompany("SBRJ", "TAM");
+                #endregion
+
+                #region [ GET ALL FLIGHTS BY AIRPORT AND/OR COMPANY SELECTED ]
+
+                var flighstByCompany = fs.QueryFlightPerFlightCompany(_airportCode, _flightCompany);
                 if (flighstByCompany.Count > 0)
                 {
                     Console.WriteLine("\nFLIGHTS BY COMPANY");
@@ -83,14 +145,18 @@ namespace BestFlightSearch
                         item.FlightGate, " | ",
                         item.FlightDate, " | ",
                         item.TimePrev, " | ",
-                        item.TimeConfirmed);
+                        item.TimeConfirmed, " | ", " | ",
+                        item.FlightStops);
 
                         Console.WriteLine(outText);
                     }
                 }
 
-                // GET ALL FLIGHTS TO AIRPORT DIRECTION
-                var flightsByDirection = fs.QueryFlightPerDirection("SBRJ");
+                #endregion
+
+                #region [ GET ALL FLIGHTS TO SELECTED AIRPORT DIRECTION ]
+
+                var flightsByDirection = fs.QueryFlightPerDirection(_airportCode);
                 if (flightsByDirection.Count > 0)
                 {
                     Console.WriteLine("\nFLIGHTS BY DIRECTION");
@@ -104,18 +170,19 @@ namespace BestFlightSearch
                         item.FlightGate, " | ",
                         item.FlightDate, " | ",
                         item.TimePrev, " | ",
-                        item.TimeConfirmed);
+                        item.TimeConfirmed, " | ",
+                        item.FlightStops);
 
                         Console.WriteLine(outText);
                     }
                 }
+
+                #endregion
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message.ToString());
             }
-
-            Console.ReadLine();
         }
     }
 }
