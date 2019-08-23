@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BestFlightSearch.Solution.Entity
+namespace BestFlightSearch.Solution.Domain
 {
     [Serializable]
     public class Flight
@@ -19,7 +19,13 @@ namespace BestFlightSearch.Solution.Entity
         public string CompanyName { get; set; }
         public string CompanyShortName { get; set; }
         public string Equipment { get; set; }
+        /// <summary>
+        /// ICAO
+        /// </summary>
         public string AirportName { get; set; }
+        /// <summary>
+        /// IATA
+        /// </summary>
         public string IATACode { get; set; }
         public string AirportCode { get; set; }
         public string City { get; set; }
