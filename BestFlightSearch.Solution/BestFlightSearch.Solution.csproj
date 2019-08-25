@@ -84,6 +84,7 @@
     <Compile Include="Shared\Commands\ICommand.cs" />
     <Compile Include="Shared\Commands\ICommandHandler.cs" />
     <Compile Include="Shared\Commands\ICommandResult.cs" />
+    <Compile Include="Shared\Exception\BestFlightSearchException.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
