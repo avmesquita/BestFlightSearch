@@ -11,13 +11,16 @@ namespace BestFlightSearch.Solution.Domain.Validators
     {
         public AirportValidator()
         {
-            RuleFor(x => x.AirportCode)
-                .NotEmpty()
-                .WithMessage("ICAO Code must be exist");
+            RuleSet("Names", () =>
+             {
+                 RuleFor(x => x.AirportCode)
+                     .NotEmpty()
+                     .WithMessage("ICAO Code must be exist");
 
-            RuleFor(a => a.IATACode)
-                .NotEmpty()
-                .WithMessage("IATA Code must be exist");
+                 RuleFor(a => a.IATACode)
+                     .NotEmpty()
+                     .WithMessage("IATA Code must be exist");
+             });
         }
     }
 }

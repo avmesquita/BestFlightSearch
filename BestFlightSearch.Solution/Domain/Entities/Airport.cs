@@ -12,6 +12,16 @@ namespace BestFlightSearch.Solution.Domain
     [Serializable]
     public class Airport : Entity
     {
+        /// <summary>
+        /// SOLID Constructor
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="shortname"></param>
+        /// <param name="iatacode"></param>
+        /// <param name="airportcode"></param>
+        /// <param name="city"></param>
+        /// <param name="state"></param>
+        /// <param name="hassiv"></param>
         public Airport(string name, string shortname,string iatacode, string airportcode,string city, string state, bool hassiv)
         {
             this.Name = name;
