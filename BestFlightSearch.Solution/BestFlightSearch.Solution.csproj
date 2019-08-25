@@ -76,6 +76,7 @@
     <Compile Include="Domain\Validators\AirportValidator.cs" />
     <Compile Include="Domain\Validators\CompanyValidator.cs" />
     <Compile Include="Domain\Validators\FlightValidator.cs" />
+    <Compile Include="FlightSearchFlightStatus.cs" />
     <Compile Include="FlightSearchInfraero.cs" />
     <Compile Include="FlightSearchRapidApiSkyScanner.cs" />
     <Compile Include="FlightSearchSkyScannerIO.cs" />
