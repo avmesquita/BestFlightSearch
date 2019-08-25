@@ -71,18 +71,25 @@ namespace BestFlightSearch.Solution
                 {
                     foreach (XmlNode item in nodes)
                     {
-                        var obj = new Airport
-                            (
-                                item["NOM_AEROPORTO"].InnerText,
-                                item["VNOM_CURTO"].InnerText,
-                                item["COD_IATA"].InnerText,
-                                item["COD_ICAO"].InnerText,
-                                item["NOM_CIDADE"].InnerText,
-                                item["SIG_UF"].InnerText,
-                                (item["POSSUI_SIV"].InnerText == "S") ? true : false
-                            );
+                        try
+                        {
+                            var obj = new Airport
+                                (
+                                    item["NOM_AEROPORTO"].InnerText,
+                                    item["VNOM_CURTO"].InnerText,
+                                    item["COD_IATA"].InnerText,
+                                    item["COD_ICAO"].InnerText,
+                                    item["NOM_CIDADE"].InnerText,
+                                    item["SIG_UF"].InnerText,
+                                    (item["POSSUI_SIV"].InnerText == "S") ? true : false
+                                );
 
-                        airports.Add(obj);
+                            airports.Add(obj);
+                        }
+                        catch
+                        {
+                            continue;
+                        }
                     };
                 }
 
@@ -122,13 +129,20 @@ namespace BestFlightSearch.Solution
                 {
                     foreach (XmlNode item in nodes)
                     {
-                        var obj = new Company();
-
-                        obj.Name = item["NOM_CIA"].InnerText;
-                        obj.ShortName = item["SIG_CIA"].InnerText;
-
-                        companies.Add(obj);
-                    };
+                        try
+                        {
+                            var obj = new Company
+                                (
+                                    item["NOM_CIA"].InnerText,
+                                    item["SIG_CIA"].InnerText
+                                );
+                            companies.Add(obj);
+                        }
+                        catch
+                        {
+                            continue;
+                        }
+                    }
                 }
 
                 // RETURN AIRPORTS LIST
@@ -177,30 +191,38 @@ namespace BestFlightSearch.Solution
                 {
                     foreach (XmlNode item in nodes)
                     {
-                        var obj = new Flight();
+                        try
+                        {
+                            var obj = new Flight
+                                (
+                            item["NUM_VOO"].InnerText,
+                            item["DAT_VOO"].InnerText,
+                            item["HOR_PREV"].InnerText,
+                            item["HOR_CONF"].InnerText,
+                            item["NUM_TPS"].InnerText,
+                            item["NUM_GATE"].InnerText,
+                            item["TXT_OBS"].InnerText,
+                            item["NOM_CIA"].InnerText,
+                            item["SIG_CIA_AEREA"].InnerText,
+                            item["DSC_EQUIPAMENTO"].InnerText,
+                            item["NOM_AEROPORTO"].InnerText,
+                            item["COD_IATA"].InnerText,
+                            item["COD_ICAO"].InnerText,
+                            item["NOM_LOCALIDADE"].InnerText,
+                            item["SIG_UF"].InnerText,
+                            item["NOM_PAIS"].InnerText,
+                            item["DSC_NATUREZA"].InnerText,
+                            item["DSC_STATUS"].InnerText,
+                            item["ESCALAS"].InnerText
+                        );
 
-                        obj.FlightNumber = item["NUM_VOO"].InnerText;
-                        obj.FlightDate = item["DAT_VOO"].InnerText;
-                        obj.TimePrev = item["HOR_PREV"].InnerText;
-                        obj.TimeConfirmed = item["HOR_CONF"].InnerText;
-                        obj.FlightTPS = item["NUM_TPS"].InnerText;
-                        obj.FlightGate = item["NUM_GATE"].InnerText;
-                        obj.Obs = item["TXT_OBS"].InnerText;
-                        obj.CompanyName = item["NOM_CIA"].InnerText;
-                        obj.CompanyShortName = item["SIG_CIA_AEREA"].InnerText;
-                        obj.Equipment = item["DSC_EQUIPAMENTO"].InnerText;
-                        obj.AirportName = item["NOM_AEROPORTO"].InnerText;
-                        obj.IATACode = item["COD_IATA"].InnerText;
-                        obj.AirportCode = item["COD_ICAO"].InnerText;
-                        obj.City = item["NOM_LOCALIDADE"].InnerText;
-                        obj.StateCode = item["SIG_UF"].InnerText;
-                        obj.Country = item["NOM_PAIS"].InnerText;
-                        obj.FlightKind = item["DSC_NATUREZA"].InnerText;
-                        obj.FlightStatus = item["DSC_STATUS"].InnerText;
-                        obj.FlightStops = item["ESCALAS"].InnerText;
-
-                        flights.Add(obj);
-                    };
+                            flights.Add(obj);
+                        }
+                        catch
+                        {
+                            continue;
+                        }
+                    }
                 }
 
                 // RETURN AIRPORTS LIST
@@ -249,30 +271,38 @@ namespace BestFlightSearch.Solution
                 {
                     foreach (XmlNode item in nodes)
                     {
-                        var obj = new Flight();
+                        try
+                        {
+                            var obj = new Flight
+                                (
+                            item["NUM_VOO"].InnerText,
+                            item["DAT_VOO"].InnerText,
+                            item["HOR_PREV"].InnerText,
+                            item["HOR_CONF"].InnerText,
+                            item["NUM_TPS"].InnerText,
+                            item["NUM_GATE"].InnerText,
+                            item["TXT_OBS"].InnerText,
+                            item["NOM_CIA"].InnerText,
+                            item["SIG_CIA_AEREA"].InnerText,
+                            item["DSC_EQUIPAMENTO"].InnerText,
+                            item["NOM_AEROPORTO"].InnerText,
+                            item["COD_IATA"].InnerText,
+                            item["COD_ICAO"].InnerText,
+                            item["NOM_LOCALIDADE"].InnerText,
+                            item["SIG_UF"].InnerText,
+                            item["NOM_PAIS"].InnerText,
+                            item["DSC_NATUREZA"].InnerText,
+                            item["DSC_STATUS"].InnerText,
+                            item["ESCALAS"].InnerText
+                        );
 
-                        obj.FlightNumber = item["NUM_VOO"].InnerText;
-                        obj.FlightDate = item["DAT_VOO"].InnerText;
-                        obj.TimePrev = item["HOR_PREV"].InnerText;
-                        obj.TimeConfirmed = item["HOR_CONF"].InnerText;
-                        obj.FlightTPS = item["NUM_TPS"].InnerText;
-                        obj.FlightGate = item["NUM_GATE"].InnerText;
-                        obj.Obs = item["TXT_OBS"].InnerText;
-                        obj.CompanyName = item["NOM_CIA"].InnerText;
-                        obj.CompanyShortName = item["SIG_CIA_AEREA"].InnerText;
-                        obj.Equipment = item["DSC_EQUIPAMENTO"].InnerText;
-                        obj.AirportName = item["NOM_AEROPORTO"].InnerText;
-                        obj.IATACode = item["COD_IATA"].InnerText;
-                        obj.AirportCode = item["COD_ICAO"].InnerText;
-                        obj.City = item["NOM_LOCALIDADE"].InnerText;
-                        obj.StateCode = item["SIG_UF"].InnerText;
-                        obj.Country = item["NOM_PAIS"].InnerText;
-                        obj.FlightKind = item["DSC_NATUREZA"].InnerText;
-                        obj.FlightStatus = item["DSC_STATUS"].InnerText;
-                        obj.FlightStops = item["ESCALAS"].InnerText;
-
-                        flights.Add(obj);
-                    };
+                            flights.Add(obj);
+                        }
+                        catch
+                        {
+                            continue;
+                        }
+                    }
                 }
 
                 // RETURN AIRPORTS LIST
@@ -316,30 +346,38 @@ namespace BestFlightSearch.Solution
                 {
                     foreach (XmlNode item in nodes)
                     {
-                        var obj = new Flight();
+                        try
+                        {
+                            var obj = new Flight
+                                (
+                            item["NUM_VOO"].InnerText,
+                            item["DAT_VOO"].InnerText,
+                            item["HOR_PREV"].InnerText,
+                            item["HOR_CONF"].InnerText,
+                            item["NUM_TPS"].InnerText,
+                            item["NUM_GATE"].InnerText,
+                            item["TXT_OBS"].InnerText,
+                            item["NOM_CIA"].InnerText,
+                            item["SIG_CIA_AEREA"].InnerText,
+                            item["DSC_EQUIPAMENTO"].InnerText,
+                            item["NOM_AEROPORTO"].InnerText,
+                            item["COD_IATA"].InnerText,
+                            item["COD_ICAO"].InnerText,
+                            item["NOM_LOCALIDADE"].InnerText,
+                            item["SIG_UF"].InnerText,
+                            item["NOM_PAIS"].InnerText,
+                            item["DSC_NATUREZA"].InnerText,
+                            item["DSC_STATUS"].InnerText,
+                            item["ESCALAS"].InnerText
+                        );
 
-                        obj.FlightNumber = item["NUM_VOO"].InnerText;
-                        obj.FlightDate = item["DAT_VOO"].InnerText;
-                        obj.TimePrev = item["HOR_PREV"].InnerText;
-                        obj.TimeConfirmed = item["HOR_CONF"].InnerText;
-                        obj.FlightTPS = item["NUM_TPS"].InnerText;
-                        obj.FlightGate = item["NUM_GATE"].InnerText;
-                        obj.Obs = item["TXT_OBS"].InnerText;
-                        obj.CompanyName = item["NOM_CIA"].InnerText;
-                        obj.CompanyShortName = item["SIG_CIA_AEREA"].InnerText;
-                        obj.Equipment = item["DSC_EQUIPAMENTO"].InnerText;
-                        obj.AirportName = item["NOM_AEROPORTO"].InnerText;
-                        obj.IATACode = item["COD_IATA"].InnerText;
-                        obj.AirportCode = item["COD_ICAO"].InnerText;
-                        obj.City = item["NOM_LOCALIDADE"].InnerText;
-                        obj.StateCode = item["SIG_UF"].InnerText;
-                        obj.Country = item["NOM_PAIS"].InnerText;
-                        obj.FlightKind = item["DSC_NATUREZA"].InnerText;
-                        obj.FlightStatus = item["DSC_STATUS"].InnerText;
-                        obj.FlightStops = item["ESCALAS"].InnerText;
-
-                        flights.Add(obj);
-                    };
+                            flights.Add(obj);
+                        }
+                        catch
+                        {
+                            continue;
+                        }
+                    }
                 }
 
                 // RETURN AIRPORTS LIST
