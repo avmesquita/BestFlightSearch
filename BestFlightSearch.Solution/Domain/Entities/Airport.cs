@@ -9,6 +9,11 @@ using BestFlightSearch.Solution.Domain.Validators;
 
 namespace BestFlightSearch.Solution.Domain
 {
+    /// <summary>
+    /// AIRPORT
+    /// Airpost is designated for IATA Code and ICAO Code
+    /// IATA Code List -> http://ourairports.com/data/airports.csv
+    /// </summary>
     [Serializable]
     public class Airport : Entity
     {
